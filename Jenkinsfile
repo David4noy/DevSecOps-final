@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_CREDENTIALS = credentials('docker')
-        REPOSITORY = "haviv1idan/dev_sec_ops_course"
+        REPOSITORY = "davidnoy/dev_sec_ops_final"
         APP_IMAGE_NAME = 'flask_app'
         APP_CONTAINER_NAME = 'flask_app'
         SERVER_IMAGE_NAME = 'python_server'
