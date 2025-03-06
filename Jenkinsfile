@@ -120,6 +120,7 @@ pipeline {
     post {
         always {
             echo "cleaning up"
+            echo params.USER_EMAIL
         }
         failure {
             script {
