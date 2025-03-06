@@ -96,7 +96,7 @@ pipeline {
             }
             steps {
                 script {
-                    withDockerRegistry([credentialsId: 'docker', url: 'https://index.docker.io/v1/']) {
+                    withDockerRegistry([credentialsId: '2695549b-ff38-44a4-a7e9-bf77c9c4ec36', url: 'https://index.docker.io/v1/']) {
                         echo 'Logged in to Docker Hub'
                         sh "docker push ${REPOSITORY}:${env.APP_BUILD_TAG}"
                         sh "docker push ${REPOSITORY}:${env.SERVER_BUILD_TAG}"
