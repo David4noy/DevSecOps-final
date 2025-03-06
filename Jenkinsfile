@@ -119,7 +119,7 @@ pipeline {
 
     post {
         always {
-            echo "cleaning up"
+            echo "cleaning up from ${env.BRANCH_NAME}"
             echo params.USER_EMAIL
         }
         failure {
