@@ -120,12 +120,12 @@ pipeline {
     post {
         always {
             echo "cleaning up from ${env.BRANCH_NAME}"
-            echo params.USER_EMAIL
+            echo env.USER_EMAIL
         }
         failure {
             script {
                 if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'develop') {
-                    mail to: params.USER_EMAIL,
+                    mail to: env.USER_EMAIL,
                         subject: "Jenkins ${env.BRANCH_NAME} Build Failed!",
                         body: "Build ${currentBuild.result} for job ${env.JOB_NAME}."
                 }
@@ -134,7 +134,7 @@ pipeline {
         success {
             script {
                 if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'develop') {
-                    mail to: params.USER_EMAIL,
+                    mail to: env.USER_EMAIL,
                         subject: "Jenkins ${env.BRANCH_NAME} Build Success!",
                         body: "Build ${currentBuild.result} for job ${env.JOB_NAME}."
                 }
