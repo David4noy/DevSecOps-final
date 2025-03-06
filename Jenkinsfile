@@ -115,5 +115,29 @@ pipeline {
                 sh "docker rmi ${REPOSITORY}:${env.SERVER_BUILD_TAG}"
             }
         }
-    }    
+    }  
+
+    post {
+        always {
+            echo "cleaning up"
+        }
+        failure {
+            script {
+                if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'develop') {
+                    mail to: params.USER_EMAIL,
+                        subject: "Jenkins ${env.BRANCH_NAME} Build Failed!",
+                        body: "Build ${currentBuild.result} for job ${env.JOB_NAME}."
+                }
+            }
+        }
+        success {
+            script {
+                if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'develop') {
+                    mail to: params.USER_EMAIL,
+                        subject: "Jenkins ${env.BRANCH_NAME} Build Success!",
+                        body: "Build ${currentBuild.result} for job ${env.JOB_NAME}."
+                }
+            }
+        }
+    }  
 }
