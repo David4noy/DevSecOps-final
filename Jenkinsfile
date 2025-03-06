@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_CREDENTIALS = credentials('docker')
+        // DOCKER_CREDENTIALS = credentials('docker')
         REPOSITORY = "davidnoy/dev_sec_ops_final"
         APP_IMAGE_NAME = 'flask_app'
         APP_CONTAINER_NAME = 'flask_app'
