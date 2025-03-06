@@ -136,7 +136,7 @@ pipeline {
                 if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'develop') {
                     mail to: env.USER_EMAIL,
                         subject: "Jenkins ${env.BRANCH_NAME} Build Success!",
-                        body: "Build ${currentBuild.result} for job ${env.JOB_NAME}."
+                        body: "Build ${currentBuild.result} for job ${env.JOB_NAME}.\n\n${REPOSITORY}:${env.APP_BUILD_TAG}\n\n${REPOSITORY}:${env.SERVER_BUILD_TAG}"
                 }
             }
         }
