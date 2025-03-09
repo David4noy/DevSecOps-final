@@ -135,8 +135,26 @@ pipeline {
             script {
                 if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'develop') {
                     mail to: env.USER_EMAIL,
-                        subject: "Jenkins ${env.BRANCH_NAME} Build Success!",
-                        body: "Build ${currentBuild.result} for job ${env.JOB_NAME}.\n\ndocker run -itd --name dev-server ${REPOSITORY}:${env.APP_BUILD_TAG}\n\ndocker run -itd --name dev-app ${REPOSITORY}:${env.SERVER_BUILD_TAG}"
+                        subject: "Jenkins ${env.BRANCH_NAME} Build for ${currentBuild.result} for job ${env.JOB_NAME} Success!",
+                        body: """
+                            Commands executed:
+
+                            1. Update Helm values tags:
+
+                            python3 ${env.TRIVIA_PATH}proj-chart/update_tags.py ${env.APP_BUILD_TAG} ${env.SERVER_BUILD_TAG}
+
+
+                            2. Deploy Helm chart:
+
+                            helm install proj-release ${env.TRIVIA_PATH}proj-chart/
+
+
+                            Run with Docker:
+
+                            docker run -itd --name dev-app ${REPOSITORY}:${env.APP_BUILD_TAG}
+
+                            ocker run -itd --name dev-server ${REPOSITORY}:${env.SERVER_BUILD_TAG}
+                            """
                 }
             }
         }
