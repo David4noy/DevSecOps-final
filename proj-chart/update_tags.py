@@ -5,9 +5,9 @@ import yaml
 # Constant for the YAML file path (assumes it's in the same folder)
 VALUES_FILE = "values.yaml"
 
-def update_tags(yaml_file, flask_tag, python_tag):
+def update_tags(flask_tag, python_tag):
     # Load the YAML file
-    with open(yaml_file, 'r') as f:
+    with open(VALUES_FILE, 'r') as f:
         data = yaml.safe_load(f)
     
     # Update the tag values
@@ -15,9 +15,9 @@ def update_tags(yaml_file, flask_tag, python_tag):
     data['pythonServer']['tag'] = python_tag
     
     # Write the changes back to the file
-    with open(yaml_file, 'w') as f:
+    with open(VALUES_FILE, 'w') as f:
         yaml.safe_dump(data, f, default_flow_style=False)
-    print(f"Updated tags in {yaml_file}")
+    print(f"Updated tags in {VALUES_FILE}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:

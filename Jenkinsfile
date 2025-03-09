@@ -146,7 +146,7 @@ pipeline {
 
                             2. Deploy Helm chart:
 
-                            helm install proj-release ${env.TRIVIA_PATH}proj-chart/
+                            helm upgrade proj-release ${env.TRIVIA_PATH}proj-chart/
 
 
                             Run with Docker:
