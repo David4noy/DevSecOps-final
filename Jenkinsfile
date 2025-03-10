@@ -141,12 +141,14 @@ pipeline {
 
                             1. Update Helm values tags:
 
-                            python3 ${env.TRIVIA_PATH}proj-chart/update_tags.py ${env.APP_BUILD_TAG} ${env.SERVER_BUILD_TAG}
+                            cd ${env.TRIVIA_PATH}proj-chart/
+                            python3 update_tags.py ${env.APP_BUILD_TAG} ${env.SERVER_BUILD_TAG}
 
 
                             2. Deploy Helm chart:
 
-                            helm upgrade proj-release ${env.TRIVIA_PATH}proj-chart/
+                            cd ..
+                            helm upgrade proj-release proj-chart/
 
 
                             Run with Docker:
